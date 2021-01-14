@@ -45,7 +45,7 @@ public class CSVController {
     @GetMapping("/download")
     public ResponseEntity<List<Car>> getAllCars () {
             try {
-                List<Car> Cars = fileService.getAllCars();
+                List<Car> Cars = fileService.loadDataFromDatabase();
 
                 if (Cars.isEmpty()) {
                     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -57,7 +57,7 @@ public class CSVController {
             }
     }
 
-    //1-Stream :Get Car By First Name
+    
     @GetMapping(value = "/Cars/findByModel/{Model}")
     public ResponseEntity<List<Car>> getCarByModel (@PathVariable String Model) {
         try {
@@ -73,7 +73,7 @@ public class CSVController {
         }
     }
 
-    //2-Stream :Get Car By Name
+
     @GetMapping("/Cars/findByName/{name}")
     public ResponseEntity<List<Car>> getCarsByName (@PathVariable String name) {
         try {
@@ -89,7 +89,7 @@ public class CSVController {
         }
     }
 
-    //3-Stream :Get Last Car By First Name
+
     @GetMapping(value = "/Cars/findCarWithLessPowerHorse/stream")
     public ResponseEntity<Car> getCarHaveLessHorsePower () {
         try {
@@ -105,7 +105,7 @@ public class CSVController {
         }
     }
 
-    //4-Stream : Sorted by Name and Date
+
     @GetMapping(value = "/Cars/sortedByModelAndHorsePower/stream/")
     public ResponseEntity<List<Car>> sortedByModelAndHorsePower() {
         try {
@@ -121,7 +121,6 @@ public class CSVController {
         }
     }
 
-    //5-Stream :Get Car By Name With More than 50 downloads and sorted by date.
     @GetMapping(value = "/Cars/getCarsByModelAndSortedByHorsePower/stream/{model}")
     public ResponseEntity<List<Car>> getCarsByModelAndSortedByHorsePower(@PathVariable String model) {
         try {
@@ -137,7 +136,7 @@ public class CSVController {
         }
     }
 
-    //6-Stream :Get Cars By Model Of Origin and sorted by Model.
+
     @GetMapping(value = "/Cars/getCarsByModelOfOriginAndSortedByModel/stream/{origin}/{model}")
     public ResponseEntity<List<Car>> getCarsByModelAndSortedByHorsePower(@PathVariable String origin,@PathVariable String model) {
         try {

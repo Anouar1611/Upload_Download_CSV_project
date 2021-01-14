@@ -21,6 +21,9 @@ public class CSVService {
     @Autowired
     CarRepo repository;
 
+    @Autowired
+    SparkSession sparkSession;
+
     public void save(MultipartFile file) {
         try {
             List<Car> Cars = CSVHelper.csvToCars(file.getInputStream());
@@ -90,5 +93,31 @@ public class CSVService {
                 .collect(Collectors.toList());
     }
 
+    public List<Car> loadDataFromDatabase(){
+        SparkSession spark = SparkSession.builder()
+                .appName("Spring Boot App with Spark SQL")
+                .config("spark.master", "local")
+                .getOrCreate();
+
+        Encoder<Car> carEncoder = Encoders.bean(Car.class);
+
+        /*return spark.read()
+                .format("jdbc")
+                .option("url", "jdbc:h2:mem:testdb")
+                .option("dbtable", "ORDERS")
+                .option("user", "sa")
+                .option("password", "")
+                .load()
+                .as(orderEncoder)
+                .collectAsList();*/
+        List<Car> orders= spark.read()
+                .option("header","true")
+                .option("delimiter",",")
+                .csv("src/main/resources/cars.csv")
+                .as(carEncoder)
+                .collectAsList();
+        return  orders;
+
+    }
 
 }

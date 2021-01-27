@@ -1,6 +1,6 @@
-package com.project.demo.exception;
+package com.asmai.project.exception;
 
-import com.project.demo.message.ResponseMessage;
+import com.asmai.project.message.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

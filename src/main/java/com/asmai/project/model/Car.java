@@ -1,4 +1,4 @@
-package com.project.demo.model;
+package com.asmai.project.model;
 
 import org.springframework.stereotype.Component;
 

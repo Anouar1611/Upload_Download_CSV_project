@@ -1,9 +1,9 @@
-package com.project.demo.controller;
+package com.asmai.project.controller;
 
-import com.project.demo.helper.CSVHelper;
-import com.project.demo.message.ResponseMessage;
-import com.project.demo.model.Car;
-import com.project.demo.service.CSVService;
+import com.asmai.project.helper.CSVHelper;
+import com.asmai.project.message.ResponseMessage;
+import com.asmai.project.model.Car;
+import com.asmai.project.service.CSVService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +45,7 @@ public class CSVController {
     @GetMapping("/download")
     public ResponseEntity<List<Car>> getAllCars () {
             try {
-                List<Car> Cars = fileService.loadDataFromDatabase();
+                List<Car> Cars = fileService.getAllCars();
 
                 if (Cars.isEmpty()) {
                     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -57,7 +57,7 @@ public class CSVController {
             }
     }
 
-    
+
     @GetMapping(value = "/Cars/findByModel/{Model}")
     public ResponseEntity<List<Car>> getCarByModel (@PathVariable String Model) {
         try {
@@ -93,7 +93,7 @@ public class CSVController {
     @GetMapping(value = "/Cars/findCarWithLessPowerHorse/stream")
     public ResponseEntity<Car> getCarHaveLessHorsePower () {
         try {
-            Car Car = fileService.getCarHaveLessHorsePoweer();
+            Car Car = fileService.getCarHaveLessHorsePower();
 
             if (Car == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -136,21 +136,6 @@ public class CSVController {
         }
     }
 
-
-    @GetMapping(value = "/Cars/getCarsByModelOfOriginAndSortedByModel/stream/{origin}/{model}")
-    public ResponseEntity<List<Car>> getCarsByModelAndSortedByHorsePower(@PathVariable String origin,@PathVariable String model) {
-        try {
-            List<Car> Cars=fileService.getCarsByModelAndOriginAndSortedByHorsePower(origin,model);
-
-            if (Cars.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<List<Car>>(Cars, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
 }
 

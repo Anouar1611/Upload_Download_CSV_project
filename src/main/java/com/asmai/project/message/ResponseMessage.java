@@ -1,4 +1,4 @@
-package com.project.demo.message;
+package com.asmai.project.message;
 
 public class ResponseMessage {
 

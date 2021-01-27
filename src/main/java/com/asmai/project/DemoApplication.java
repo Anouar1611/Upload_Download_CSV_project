@@ -1,12 +1,7 @@
-package com.project.demo;
+package com.asmai.project;
 
-import com.project.demo.model.Car;
-import org.apache.spark.sql.SparkSession;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.*;
 
 
 @SpringBootApplication

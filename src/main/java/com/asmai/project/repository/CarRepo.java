@@ -1,9 +1,8 @@
-package com.project.demo.repository;
+package com.asmai.project.repository;
 
 
-import com.project.demo.model.Car;
+import com.asmai.project.model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

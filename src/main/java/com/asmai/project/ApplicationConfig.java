@@ -1,4 +1,4 @@
-package com.project.demo;
+package com.asmai.project;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;

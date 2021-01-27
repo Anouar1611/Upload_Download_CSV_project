@@ -1,10 +1,8 @@
-package com.project.demo.service;
+package com.asmai.project.service;
 
-import com.project.demo.helper.CSVHelper;
-import com.project.demo.model.Car;
-import com.project.demo.repository.CarRepo;
-import org.apache.spark.sql.Encoder;
-import org.apache.spark.sql.Encoders;
+import com.asmai.project.helper.CSVHelper;
+import com.asmai.project.model.Car;
+import com.asmai.project.repository.CarRepo;
 import org.apache.spark.sql.SparkSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +58,7 @@ public class CSVService {
 
     }
 
-    public Car getCarHaveLessHorsePoweer() {
+    public Car getCarHaveLessHorsePower() {
 
         return repository.findAll().stream()
                 .min(Comparator.comparing(Car::getHorsepower)).get();
@@ -93,31 +91,6 @@ public class CSVService {
                 .collect(Collectors.toList());
     }
 
-    public List<Car> loadDataFromDatabase(){
-        SparkSession spark = SparkSession.builder()
-                .appName("Spring Boot App with Spark SQL")
-                .config("spark.master", "local")
-                .getOrCreate();
 
-        Encoder<Car> carEncoder = Encoders.bean(Car.class);
-
-        /*return spark.read()
-                .format("jdbc")
-                .option("url", "jdbc:h2:mem:testdb")
-                .option("dbtable", "ORDERS")
-                .option("user", "sa")
-                .option("password", "")
-                .load()
-                .as(orderEncoder)
-                .collectAsList();*/
-        List<Car> orders= spark.read()
-                .option("header","true")
-                .option("delimiter",",")
-                .csv("src/main/resources/cars.csv")
-                .as(carEncoder)
-                .collectAsList();
-        return  orders;
-
-    }
 
 }
